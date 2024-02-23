@@ -3,10 +3,22 @@ using UnityEngine;
 public class PickupBox : MonoBehaviour {
 	bool isCarried = false;
 	[SerializeField] GameObject target;
+	GameObject box;
 
 	private void OnCollisionStay2D(Collision2D collision) {
-		if (collision.gameObject.CompareTag("Player")) {
-			if (Input.GetKeyDown(KeyCode.E)) {
+		if (collision.gameObject.CompareTag("Box")) {
+			if (Input.GetKey(KeyCode.E)) {
+				box = collision.gameObject;
+				isCarried = true;
+				print("E pressed. Picked up box.");
+			}
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("Box")) {
+			if (Input.GetKey(KeyCode.E)) {
+				box = collision.gameObject;
 				isCarried = true;
 				print("E pressed. Picked up box.");
 			}
@@ -14,13 +26,13 @@ public class PickupBox : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (isCarried == true) {
-			transform.position = target.transform.position;
+		if (isCarried) {
+			box.transform.position = target.transform.position;
 		}
-		if (Input.GetKeyDown(KeyCode.F) && (isCarried == true)) {
-		Vector3 newPosition = transform.position;
-		transform.position = newPosition;
-		isCarried = false;
+		if (Input.GetKey(KeyCode.F) && isCarried == true) {
+			Vector3 newPosition = box.transform.position;
+			box.transform.position = newPosition;
+			isCarried = false;
 		}
 	}
 }
