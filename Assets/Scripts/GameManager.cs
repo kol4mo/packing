@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] FloatVariable score;
 	[SerializeField] FloatVariable timer;
 	[SerializeField] float setTimer = 300;
+	[SerializeField] Transform cameraPos;
 
 	public void Update() {
 		switch (currentState) {
@@ -76,5 +77,13 @@ public class GameManager : MonoBehaviour {
 	public void mainMenu() {
 		pressSound.Play();
 		currentState = gameState.start;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		cameraPos.position += new Vector3(30, 0, 0);
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision) {
+		cameraPos.position += new Vector3(30, 0, 0);
 	}
 }
