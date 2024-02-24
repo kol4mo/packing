@@ -13,16 +13,18 @@ public class GameManager : MonoBehaviour {
 		Lose
 	}
 	private gameState currentState = gameState.start;
+	public GameObject StartScreen;
+	[SerializeField] AudioSource pressSound;
 
 	public void Update() {
 		switch (currentState) {
 			case gameState.start:
 				Cursor.lockState = CursorLockMode.None;
-
+				StartScreen.SetActive(true);
 				break;
 			case gameState.startGame:
 				Cursor.lockState = CursorLockMode.Locked;
-
+				StartScreen.SetActive(false);
 				currentState = gameState.Game;
 				break;
 			case gameState.Game: 
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void startGame() {
+		pressSound.Play();
 		currentState = gameState.startGame;
 	}
 }
