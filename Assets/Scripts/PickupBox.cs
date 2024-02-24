@@ -1,10 +1,19 @@
 using UnityEngine;
 
+	[RequireComponent(typeof(AudioSource))]
+	[RequireComponent(typeof(AudioSource))]
 public class PickupBox : MonoBehaviour {
 	bool isCarried = false;
 	[SerializeField] GameObject target;
 	[SerializeField] Rigidbody2D rb;
+	AudioSource audio;
+	public AudioClip pickup;
+	public AudioClip thud;
 	GameObject box;
+
+	private void Awake() {
+		audio = GetComponent<AudioSource>();
+	}
 
 	private void OnCollisionStay2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag("Box")) {
@@ -22,6 +31,9 @@ public class PickupBox : MonoBehaviour {
 				box = collision.gameObject;
 				isCarried = true;
 				print("E pressed. Picked up box.");
+				if (!audio.isPlaying) {
+					audio.PlayOneShot(pickup);
+				}
 			}
 		}
 	}
@@ -44,7 +56,9 @@ public class PickupBox : MonoBehaviour {
 			//box.transform.position = newPosition;
 			Vector3 temp = box.transform.position;
 			temp.x = Mathf.Round(temp.x);
+			temp.y = Mathf.Round(temp.y);
 			box.transform.position = temp;
+			audio.PlayOneShot(thud);
 		}
 	}
 }
