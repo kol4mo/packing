@@ -58,9 +58,10 @@ public class PerlinNoise : MonoBehaviour {
 	}
 
 	private int getIdUsingPerlin(int x, int y) {
+		int newNoise = UnityEngine.Random.Range(0, 1000);
 		float rawPerlin = Mathf.PerlinNoise(
-			(x - xOffset) / magnification,
-			(y - yOffset) / magnification);
+			((x - xOffset) / magnification) + newNoise,
+			((y - yOffset) / magnification) + newNoise);
 		float clampedPerlin = Mathf.Clamp(rawPerlin, 0.0f, 1.0f);
 		float scaledPerlin = clampedPerlin * tileset.Count;
 		if (scaledPerlin == 4) {
