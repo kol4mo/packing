@@ -3,14 +3,17 @@ using UnityEngine;
 	[RequireComponent(typeof(AudioSource))]
 	[RequireComponent(typeof(AudioSource))]
 public class PickupBox : MonoBehaviour {
-	bool isCarried = false;
 	[SerializeField] GameObject target;
 	[SerializeField] Rigidbody2D rb;
 	[SerializeField] AudioSource sPickup;
 	[SerializeField] AudioSource sThud;
 	public AudioClip pickup;
 	public AudioClip thud;
+
 	GameObject box;
+
+	bool isCarried = false;
+	bool canPlace = false;
 
 	private void Awake() {
 		//audio = GetComponent<AudioSource>();
@@ -39,6 +42,30 @@ public class PickupBox : MonoBehaviour {
 		}
 	}
 
+	private void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.gameObject.CompareTag("Place")) {
+			canPlace = true;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("Place")) {
+			canPlace = true;
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision) {
+		if (collision.gameObject.CompareTag("Place")) {
+			canPlace = false;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("Place")) {
+			canPlace = false;
+		}
+	}
+
 	private void Update() {
 		if (isCarried) {
 			box.transform.position = target.transform.position;
@@ -51,7 +78,7 @@ public class PickupBox : MonoBehaviour {
 				//rb.SetRotation(Vector3.Angle(Vector3.up, move));
 			}
 		}
-		if (Input.GetKey(KeyCode.F) && isCarried == true) {
+		if (Input.GetKey(KeyCode.F) && isCarried == true && canPlace == true) {
 			Vector3 newPosition = box.transform.position;
 			isCarried = false;
 			//box.transform.position = newPosition;
