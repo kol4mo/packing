@@ -92,12 +92,13 @@ public class PickupBox : MonoBehaviour {
 		if (Input.GetKey(KeyCode.F) && isCarried == true && canPlace == true) {
 			Vector3 newPosition = box.transform.position;
 			isCarried = false;
-			//box.transform.position = newPosition;
+			box.transform.position = newPosition;
 			Vector3 temp = box.transform.position;
 			temp.x = Mathf.Round(temp.x);
 			temp.y = Mathf.Round(temp.y);
 			box.transform.position = temp;
 			sThud.PlayOneShot(thud);
+			
 		}
 	}
 }
