@@ -10,21 +10,24 @@ public class GameManager : MonoBehaviour {
 		start,
 		startGame,
 		Game,
-		Win,
-		Lose,
+		End,
 		Controls
 	}
 	private gameState currentState = gameState.start;
 	[Header("UI")]
 	[SerializeField] TMP_Text timerText;
 	[SerializeField] TMP_Text scoreText;
+	[SerializeField] TMP_Text endScoreText;
+	[SerializeField] TMP_Text endTotalScoreText;
 	public GameObject StartScreen;
 	public GameObject gameScreen;
 	public GameObject controlScreen;
+	public GameObject endScreen;
 	[Header("Sound")]
 	[SerializeField] AudioSource pressSound;
 	[Header("Variables")]
 	[SerializeField] FloatVariable score;
+	[SerializeField] FloatVariable totalScore;
 	[SerializeField] FloatVariable timer;
 	[SerializeField] float setTimer = 300;
 
@@ -35,25 +38,33 @@ public class GameManager : MonoBehaviour {
 				StartScreen.SetActive(true);
 				gameScreen.SetActive(false);
 				controlScreen.SetActive(false);
+				endScreen.SetActive(false);
 				break;
 			case gameState.startGame:
 				Cursor.lockState = CursorLockMode.Locked;
 				StartScreen.SetActive(false);
 				gameScreen.SetActive(true);
+				endScreen.SetActive(false);
 				currentState = gameState.Game;
 				timer.value = setTimer;
+				score.value = 0;
 				break;
-			case gameState.Game: 
+			case gameState.Game:
 				timer.value -= Time.deltaTime;
 				timerText.text = ((int)timer.value).ToString();
-				scoreText.text = score.value.ToString();
+
+				scoreText.text = "$" + string.Format("{0:0.00}", score.value);
 				if (timer <= 0) {
-				//check win lose
+					//check win lose
+					totalScore.value += score.value;
+					currentState = gameState.End;
 				}
 				break;
-			case gameState.Win: 
-				break;
-			case gameState.Lose: 
+			case gameState.End:
+				Cursor.lockState = CursorLockMode.None;
+				endTotalScoreText.text = "$" + string.Format("{0:0.00}", totalScore.value);
+				endScoreText.text = "$" + string.Format("{0:0.00}", score.value);
+				endScreen.SetActive(true);
 				break;
 			case gameState.Controls:
 				StartScreen.SetActive(false);

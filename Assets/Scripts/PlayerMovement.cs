@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (movement.magnitude > 0) {
 			target.transform.position = gameObject.transform.position + new Vector3(movement.normalized.x, movement.normalized.y, 0);
 		} else {
-			target.transform.position = gameObject.transform.position + new Vector3(0, -1, 0);
+			//target.transform.position = gameObject.transform.position + new Vector3(0, -1, 0);
 		}
 
 		if (isMoving) {
