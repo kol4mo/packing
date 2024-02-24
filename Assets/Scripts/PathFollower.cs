@@ -10,7 +10,7 @@ public class PathFollower : MonoBehaviour {
 	
 	[SerializeField] public SplineContainer splineContainer;
 	[Range(0,40)] public float speed = 1;
-
+	[SerializeField] public List<Transform> positions;
 	[Range(0,1)] public float Tdistance; // distance along spline (0-1)
 
 	private void OnCollisionStay2D(Collision2D collision) {

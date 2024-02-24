@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 	[RequireComponent(typeof(AudioSource))]
@@ -7,6 +8,10 @@ public class PickupBox : MonoBehaviour {
 	[SerializeField] Rigidbody2D rb;
 	[SerializeField] AudioSource sPickup;
 	[SerializeField] AudioSource sThud;
+	[SerializeField] int x;
+	[SerializeField] int y;
+	[SerializeField] Transform topleftCorner;
+	List<List<bool>> isthere;
 	public AudioClip pickup;
 	public AudioClip thud;
 
@@ -17,6 +22,14 @@ public class PickupBox : MonoBehaviour {
 
 	private void Awake() {
 		//audio = GetComponent<AudioSource>();
+		isthere = new List<List<bool>>();
+		for (int x = 0; x < this.x; x++) {
+			isthere.Add(new List<bool>());
+			for (int y = 0; y < this.y; y++) {
+				isthere[x].Add(false);
+			}
+		}
+		
 	}
 
 	private void OnCollisionStay2D(Collision2D collision) {
@@ -89,15 +102,36 @@ public class PickupBox : MonoBehaviour {
 				}
 			}
 		}
-		if (Input.GetKey(KeyCode.F) && isCarried == true && canPlace == true) {
-			Vector3 newPosition = box.transform.position;
-			isCarried = false;
-			//box.transform.position = newPosition;
-			Vector3 temp = box.transform.position;
-			temp.x = Mathf.Round(temp.x);
-			temp.y = Mathf.Round(temp.y);
-			box.transform.position = temp;
-			sThud.PlayOneShot(thud);
+		if (Input.GetKey(KeyCode.F) && isCarried == true && canPlace == true && box.TryGetComponent(out PathFollower pf)) {
+			Vector3 temp;
+			bool allgood = true;
+			foreach (Transform t in pf.positions) {
+				temp = box.transform.position;
+				temp.x = Mathf.Round(temp.x);
+				temp.y = Mathf.Round(temp.y);
+				temp = temp- topleftCorner.position;
+				if (isthere[(int)temp.x][(int)temp.y]) {
+					allgood = false;
+				}
+			}
+
+
+			if (allgood) {
+				foreach (Transform t in pf.positions) {
+					temp = box.transform.position;
+					temp.x = Mathf.Round(temp.x);
+					temp.y = Mathf.Round(temp.y);
+					temp = temp - topleftCorner.position;
+					isthere[(int)temp.x][(int)temp.y] = true;
+				}
+				//box.transform.position = newPosition;
+				temp = box.transform.position;
+				temp.x = Mathf.Round(temp.x);
+				temp.y = Mathf.Round(temp.y);
+				box.transform.position = temp;
+				sThud.PlayOneShot(thud);
+				isCarried = false;
+			}
 		}
 	}
 }

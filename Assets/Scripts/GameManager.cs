@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour {
 				break;
 			case gameState.Game:
 				timer.value -= Time.deltaTime;
-				timerText.text = ((int)timer.value).ToString();
+				var ts = TimeSpan.FromSeconds(timer.value);
+				timerText.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
 
 				scoreText.text = "$" + string.Format("{0:0.00}", score.value);
 				if (timer <= 0) {
