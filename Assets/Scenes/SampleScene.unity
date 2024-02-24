@@ -11161,6 +11161,7 @@ MonoBehaviour:
   x: 5
   y: 4
   topleftCorner: {fileID: 1124520167}
+  buttonpress: {fileID: 11400000, guid: c71a633c227c89b4b868e5955a250ecb, type: 2}
   pickup: {fileID: 8300000, guid: aac3c4f52980f1b4792fdc0aaa80e649, type: 3}
   thud: {fileID: 8300000, guid: 1722448093bfa6d4f82403c234ae3620, type: 3}
 --- !u!82 &1501365877
