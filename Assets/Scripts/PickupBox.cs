@@ -11,6 +11,7 @@ public class PickupBox : MonoBehaviour {
 	[SerializeField] int x;
 	[SerializeField] int y;
 	[SerializeField] Transform topleftCorner;
+	[SerializeField] VoidEvent buttonpress;
 	List<List<bool>> isthere;
 	public AudioClip pickup;
 	public AudioClip thud;
@@ -22,6 +23,11 @@ public class PickupBox : MonoBehaviour {
 
 	private void Awake() {
 		//audio = GetComponent<AudioSource>();
+
+		buttonpress.Subscribe(resetTruck);
+		resetTruck();
+	}
+	public void resetTruck() {
 		isthere = new List<List<bool>>();
 		for (int x = 0; x < this.x; x++) {
 			isthere.Add(new List<bool>());
@@ -29,7 +35,6 @@ public class PickupBox : MonoBehaviour {
 				isthere[x].Add(false);
 			}
 		}
-		
 	}
 
 	private void OnCollisionStay2D(Collision2D collision) {
