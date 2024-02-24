@@ -78,8 +78,4 @@ public class GameManager : MonoBehaviour {
 		currentState = gameState.start;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		cameraPos.position += new Vector3(30, 0, 0);
-	}
-
 }
