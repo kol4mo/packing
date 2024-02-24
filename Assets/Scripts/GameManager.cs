@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -13,21 +14,37 @@ public class GameManager : MonoBehaviour {
 		Lose
 	}
 	private gameState currentState = gameState.start;
+	[Header("UI")]
+	[SerializeField] TMP_Text timerText;
 	public GameObject StartScreen;
+	public GameObject gameScreen;
+	[Header("sound")]
 	[SerializeField] AudioSource pressSound;
+	[Header("Variables")]
+	[SerializeField] FloatVariable score;
+	[SerializeField] FloatVariable timer;
+	[SerializeField] float setTimer = 300;
 
 	public void Update() {
 		switch (currentState) {
 			case gameState.start:
 				Cursor.lockState = CursorLockMode.None;
 				StartScreen.SetActive(true);
+				gameScreen.SetActive(false);
 				break;
 			case gameState.startGame:
 				Cursor.lockState = CursorLockMode.Locked;
 				StartScreen.SetActive(false);
+				gameScreen.SetActive(true);
 				currentState = gameState.Game;
+				timer.value = setTimer;
 				break;
 			case gameState.Game: 
+				timer.value -= Time.deltaTime;
+				timerText.text = ((int)timer.value).ToString();
+				if (timer <= 0) {
+				//check win lose
+				}
 				break;
 			case gameState.Win: 
 				break;
