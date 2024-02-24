@@ -871,7 +871,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.25, y: 0.5}
+  m_Size: {x: 5.25, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &226870550
 MonoBehaviour:
@@ -886,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPos: {fileID: 1746632353}
+  player: {fileID: 1501365872}
 --- !u!1 &230921723
 GameObject:
   m_ObjectHideFlags: 0
@@ -12003,7 +12004,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1847051908}
-  - component: {fileID: 1847051907}
   m_Layer: 0
   m_Name: MoveBetweenScreens
   m_TagString: Untagged
@@ -12011,19 +12011,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1847051907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847051905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2230434d27f8594db555f36c1f79b71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraPos: {fileID: 1746632353}
 --- !u!4 &1847051908
 Transform:
   m_ObjectHideFlags: 0

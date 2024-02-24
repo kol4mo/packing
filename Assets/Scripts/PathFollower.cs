@@ -20,7 +20,7 @@ public class PathFollower : MonoBehaviour {
 	}
 
 	private void OnTriggerStay2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("pickup")) {
+		if (collision.gameObject.CompareTag("pickup") && Input.GetKeyDown(KeyCode.E)) {
 			isConveyer = false;
 		}
 	}
