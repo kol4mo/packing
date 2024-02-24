@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] TMP_Text scoreText;
 	[SerializeField] TMP_Text endScoreText;
 	[SerializeField] TMP_Text endTotalScoreText;
+	[SerializeField] TMP_Text endDayText;
 	public GameObject StartScreen;
 	public GameObject gameScreen;
 	public GameObject controlScreen;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] FloatVariable score;
 	[SerializeField] FloatVariable totalScore;
 	[SerializeField] FloatVariable timer;
+	[SerializeField] IntVariable day;
 	[SerializeField] float setTimer = 300;
 
 	public void Update() {
@@ -58,12 +60,14 @@ public class GameManager : MonoBehaviour {
 					//check win lose
 					totalScore.value += score.value;
 					currentState = gameState.End;
+					day.value += 1;
 				}
 				break;
 			case gameState.End:
 				Cursor.lockState = CursorLockMode.None;
 				endTotalScoreText.text = "$" + string.Format("{0:0.00}", totalScore.value);
 				endScoreText.text = "$" + string.Format("{0:0.00}", score.value);
+				endDayText.text = "DAY: " + day.value;
 				endScreen.SetActive(true);
 				break;
 			case gameState.Controls:

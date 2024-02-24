@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86035cf461c7faa48bcd06b6069e2547, type: 3}
-  m_Name: Timer
+  m_Script: {fileID: 11500000, guid: f230ce57feadd7e4d96e3303bc75b57a, type: 3}
+  m_Name: day
   m_EditorClassIdentifier: 
   initialValue: 0
-  value: 189.44672
+  value: 0
