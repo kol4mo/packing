@@ -69,13 +69,24 @@ public class PickupBox : MonoBehaviour {
 	private void Update() {
 		if (isCarried) {
 			box.transform.position = target.transform.position;
-			Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-			if (Input.GetAxisRaw("Horizontal") > 0) {
-
-				//rb.SetRotation(Vector3.Angle(Vector3.up, move) * -1);
-			}
-			else {
-				//rb.SetRotation(Vector3.Angle(Vector3.up, move));
+			if (box.TryGetComponent(out Rigidbody2D rb)) {
+				if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)) {
+					rb.SetRotation(135);
+				} else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)) {
+					rb.SetRotation(45);
+				} else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A)) {
+					rb.SetRotation(-45);
+				} else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)) {
+					rb.SetRotation(-135);
+				} else if (Input.GetKey(KeyCode.W)) {
+					rb.SetRotation(180);
+				} else if (Input.GetKey(KeyCode.S)) {
+					rb.SetRotation(0);
+				} else if (Input.GetKey(KeyCode.A)) {
+					rb.SetRotation(-90);
+				} else if (Input.GetKey(KeyCode.D)) {
+					rb.SetRotation(90);
+				}
 			}
 		}
 		if (Input.GetKey(KeyCode.F) && isCarried == true && canPlace == true) {
