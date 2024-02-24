@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
 		startGame,
 		Game,
 		Win,
-		Lose
+		Lose,
+		Controls
 	}
 	private gameState currentState = gameState.start;
 	[Header("UI")]
@@ -19,7 +20,8 @@ public class GameManager : MonoBehaviour {
 	[SerializeField] TMP_Text scoreText;
 	public GameObject StartScreen;
 	public GameObject gameScreen;
-	[Header("sound")]
+	public GameObject controlScreen;
+	[Header("Sound")]
 	[SerializeField] AudioSource pressSound;
 	[Header("Variables")]
 	[SerializeField] FloatVariable score;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour {
 				Cursor.lockState = CursorLockMode.None;
 				StartScreen.SetActive(true);
 				gameScreen.SetActive(false);
+				controlScreen.SetActive(false);
 				break;
 			case gameState.startGame:
 				Cursor.lockState = CursorLockMode.Locked;
@@ -52,11 +55,26 @@ public class GameManager : MonoBehaviour {
 				break;
 			case gameState.Lose: 
 				break;
+			case gameState.Controls:
+				StartScreen.SetActive(false);
+				gameScreen.SetActive(false);
+				controlScreen.SetActive(true);
+				break;
 		}
 	}
 
 	public void startGame() {
 		pressSound.Play();
 		currentState = gameState.startGame;
+	}
+
+	public void showControls() {
+		pressSound.Play();
+		currentState = gameState.Controls;
+	}
+
+	public void mainMenu() {
+		pressSound.Play();
+		currentState = gameState.start;
 	}
 }
