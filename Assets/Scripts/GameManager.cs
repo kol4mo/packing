@@ -77,5 +77,4 @@ public class GameManager : MonoBehaviour {
 		pressSound.Play();
 		currentState = gameState.start;
 	}
-
 }
