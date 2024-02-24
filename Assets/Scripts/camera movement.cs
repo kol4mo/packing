@@ -10,7 +10,13 @@ public class cameramovement : MonoBehaviour
 	private bool isInTruck = false;
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		cameraPos.position += new Vector3(0, 6, 0);
+		if (isInTruck) {
+			cameraPos.position -= new Vector3(0, 6, 0);
+			isInTruck = false;
+		} else {
+			cameraPos.position += new Vector3(0, 6, 0);
+			isInTruck = true;
+		}
 	}
 
 
