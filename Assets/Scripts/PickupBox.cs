@@ -6,7 +6,7 @@ public class PickupBox : MonoBehaviour {
 	bool isCarried = false;
 	[SerializeField] GameObject target;
 	[SerializeField] Rigidbody2D rb;
-	AudioSource audio;
+	new AudioSource audio;
 	public AudioClip pickup;
 	public AudioClip thud;
 	GameObject box;

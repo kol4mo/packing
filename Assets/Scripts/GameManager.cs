@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	private gameState currentState = gameState.start;
 	[Header("UI")]
 	[SerializeField] TMP_Text timerText;
+	[SerializeField] TMP_Text scoreText;
 	public GameObject StartScreen;
 	public GameObject gameScreen;
 	[Header("sound")]
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour {
 			case gameState.Game: 
 				timer.value -= Time.deltaTime;
 				timerText.text = ((int)timer.value).ToString();
+				scoreText.text = score.value.ToString();
 				if (timer <= 0) {
 				//check win lose
 				}
