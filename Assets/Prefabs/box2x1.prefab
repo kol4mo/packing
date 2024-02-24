@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8819616042107846118}
   - component: {fileID: 3220117903330589425}
   - component: {fileID: 4919662837371855275}
+  - component: {fileID: 3473115939831031279}
   m_Layer: 0
   m_Name: box2x1
   m_TagString: Box
@@ -110,8 +111,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9039150566177686583}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -190,3 +191,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.000618}
   m_EdgeRadius: 0
+--- !u!114 &3473115939831031279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9039150566177686583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0cf6fb5be7f134986c2aeed3a70976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 0}
+  speed: 1
+  Tdistance: 0
