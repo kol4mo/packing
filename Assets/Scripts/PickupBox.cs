@@ -6,13 +6,14 @@ public class PickupBox : MonoBehaviour {
 	bool isCarried = false;
 	[SerializeField] GameObject target;
 	[SerializeField] Rigidbody2D rb;
-	AudioSource audio;
+	[SerializeField] AudioSource sPickup;
+	[SerializeField] AudioSource sThud;
 	public AudioClip pickup;
 	public AudioClip thud;
 	GameObject box;
 
 	private void Awake() {
-		audio = GetComponent<AudioSource>();
+		//audio = GetComponent<AudioSource>();
 	}
 
 	private void OnCollisionStay2D(Collision2D collision) {
@@ -31,8 +32,8 @@ public class PickupBox : MonoBehaviour {
 				box = collision.gameObject;
 				isCarried = true;
 				print("E pressed. Picked up box.");
-				if (!audio.isPlaying) {
-					audio.PlayOneShot(pickup);
+				if (!sPickup.isPlaying) {
+					sPickup.PlayOneShot(pickup);
 				}
 			}
 		}
@@ -58,7 +59,7 @@ public class PickupBox : MonoBehaviour {
 			temp.x = Mathf.Round(temp.x);
 			temp.y = Mathf.Round(temp.y);
 			box.transform.position = temp;
-			audio.PlayOneShot(thud);
+			sThud.PlayOneShot(thud);
 		}
 	}
 }
