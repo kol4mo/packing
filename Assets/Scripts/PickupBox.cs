@@ -39,7 +39,7 @@ public class PickupBox : MonoBehaviour {
 
 	private void OnCollisionStay2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag("Box")) {
-			if (Input.GetKey(KeyCode.E)) {
+			if (Input.GetKey(KeyCode.E) && collision.gameObject.TryGetComponent(out PathFollower pf) && pf.canPickup) {
 				box = collision.gameObject;
 				isCarried = true;
 				print("E pressed. Picked up box.");
@@ -49,7 +49,7 @@ public class PickupBox : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("Box")) {
-			if (Input.GetKey(KeyCode.E)) {
+			if (Input.GetKey(KeyCode.E) && collision.TryGetComponent(out PathFollower pf) && pf.canPickup) {
 				box = collision.gameObject;
 				isCarried = true;
 				print("E pressed. Picked up box.");
@@ -111,7 +111,7 @@ public class PickupBox : MonoBehaviour {
 			Vector3 temp;
 			bool allgood = true;
 			foreach (Transform t in pf.positions) {
-				temp = box.transform.position;
+				temp = t.position;
 				temp.x = Mathf.Round(temp.x);
 				temp.y = Mathf.Round(temp.y);
 				temp = temp- topleftCorner.position;
@@ -123,7 +123,7 @@ public class PickupBox : MonoBehaviour {
 
 			if (allgood) {
 				foreach (Transform t in pf.positions) {
-					temp = box.transform.position;
+					temp = t.position;
 					temp.x = Mathf.Round(temp.x);
 					temp.y = Mathf.Round(temp.y);
 					temp = temp - topleftCorner.position;
@@ -136,6 +136,7 @@ public class PickupBox : MonoBehaviour {
 				box.transform.position = temp;
 				sThud.PlayOneShot(thud);
 				isCarried = false;
+				pf.canPickup = false;
 			}
 		}
 	}

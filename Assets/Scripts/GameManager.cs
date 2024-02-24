@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour {
 		if (currentState == gameState.Pause) {
 			currentState = gameState.Game;
 			pauseScreen.SetActive(false);
+			gameScreen.SetActive(true);
+
 		}
 	}
 
@@ -169,5 +171,10 @@ public class GameManager : MonoBehaviour {
 				currentImage = 1;
 				break;
 		}
+	}
+
+	public void returnToMenu() {
+		pauseScreen.SetActive(false);
+		currentState = gameState.start;
 	}
 }
