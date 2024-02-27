@@ -135,7 +135,6 @@ public class GameManager : MonoBehaviour {
 			currentState = gameState.Game;
 			pauseScreen.SetActive(false);
 			gameScreen.SetActive(true);
-
 		}
 	}
 
