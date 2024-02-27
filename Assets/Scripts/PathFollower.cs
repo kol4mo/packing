@@ -12,6 +12,7 @@ public class PathFollower : MonoBehaviour {
 	[Range(0,40)] public float speed = 1;
 	[SerializeField] public List<Transform> positions;
 	[Range(0,1)] public float Tdistance; // distance along spline (0-1)
+	public bool canPickup = true;
 
 	private void OnCollisionStay2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag("pickup")) {
@@ -20,7 +21,7 @@ public class PathFollower : MonoBehaviour {
 	}
 
 	private void OnTriggerStay2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("pickup") && Input.GetKeyDown(KeyCode.E)) {
+		if (collision.gameObject.CompareTag("pickup") && Input.GetKey(KeyCode.E)) {
 			isConveyer = false;
 		}
 	}
