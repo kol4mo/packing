@@ -6430,6 +6430,8 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 1393369172159693839, guid: a6f318bdb0c66e64abdf00139b9dc6af, type: 3}
   - {fileID: 9039150566177686583, guid: b94998785a5dcb44e985c44ce33d3cd1, type: 3}
+  - {fileID: 9039150566177686583, guid: 56cbe7df0475485408e865fd1862583e, type: 3}
+  - {fileID: 9039150566177686583, guid: 0ddef21e96799334ab0636bbeb3ecc20, type: 3}
   parentTransform: {fileID: 419922274}
   splineContainer: {fileID: 1977121658}
   minSpawnTime: 4
